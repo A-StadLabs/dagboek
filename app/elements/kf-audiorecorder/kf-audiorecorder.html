@@ -25,8 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
     </style>
     <div>
-      <p>{{rec}}</p>
-      <paper-fab on-tap="record" id="recbutt" disabled="{{rec}}" icon="av:fiber-manual-record" class="red big" title="heart"></paper-fab>
+      <paper-fab toggles active="{{recording}}" id="recbutt" disabled="{{rec}}" icon="av:fiber-manual-record" class="red big" title="heart"></paper-fab>
     </div>
   </template>
   <script>
@@ -48,6 +47,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         rec: {
           type: Boolean,
           observer: "_rec"
+        },
+        recording: {
+          type: Boolean,
+          observer: "_recording",
+          value: false
         }
       },
 
@@ -60,6 +64,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.$.recbutt.removeAttribute("disabled");
         }
       },
+
+      test: function(){
+        console.log("button pressed");
+      },
+
+
 
       ready: function() { 
 
@@ -179,7 +189,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       stoprec: function() {
         console.log("Stop Record");
         this.stopRecording(this.$.stoprecordbutton);
+        this.fire('rec-end');
+      },
+
+      _recording: function(){
+        if(this.startRecording&&this.stopRecording){
+        console.log("recording is ", this.recording);
+        if(this.recording){
+          this.record();
+        } else {
+          this.stoprec();
+        }
       }
+      },
 
     });
   })();

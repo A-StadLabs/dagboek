@@ -21,6 +21,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     console.log('Our app is ready to rock!');
   });
 
+  app.recend = function(){
+    console.log("REC END");
+    var vraag = document.querySelector('#vraag');
+    vraag._vragen();
+    vraag.autoplay = true;
+  };
+
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', function() {
     // imports are loaded and elements have been registered
@@ -39,5 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.scrollPageToTop = function() {
     document.getElementById('mainContainer').scrollTop = 0;
   };
+
+ 
 
 })(document);

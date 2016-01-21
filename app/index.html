@@ -106,11 +106,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <section data-route="home">
  <div class="vertical layout demo">
       <div class="flex vertical layout center-center">
-        <kf-vraag selectedkey="{{selectedkey}}" play="{{playing}}"></kf-vraag>
-        {{playing}}
+        <kf-vraag id="vraag" selectedkey="{{selectedkey}}" play="{{playing}}"></kf-vraag>
       </div>
       <div class="flex vertical layout center-center">            
-        <kf-audiorecorder tag="antwoord" key="{{selectedkey}}" rec="{{playing}}"></kf-audiorecorder>
+        <kf-audiorecorder on-rec-end="recend" tag="antwoord" key="{{selectedkey}}" rec="{{playing}}"></kf-audiorecorder>
       </div>
     </div>
               

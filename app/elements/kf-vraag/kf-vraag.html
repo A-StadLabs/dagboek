@@ -95,6 +95,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Boolean,
           notify: true,
           value: true
+        },
+        autoplay: {
+          type: Boolean,
+          notify: true,
+          value: true
         }
       },
 
@@ -115,6 +120,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           //console.log(snap.child(snap.key()).val().data);
           self.vragen = self.object2array(snap.val());
           
+        });
+        this.addEventListener('shuffle', function(){
+          self._vragen;
         });
         
       },
@@ -153,7 +161,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         audioplayer.controls = false;
         audioplayer.id = "player";
         audioplayer.src = this.selectedVraag;
-        audioplayer.autoplay = false;
+        audioplayer.autoplay = this.autoplay;
         document.body.appendChild(audioplayer); 
         this.$.playbtn.removeAttribute("disabled");
 
