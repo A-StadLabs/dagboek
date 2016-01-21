@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
     </style>
     <div>
-      <paper-fab toggles active="{{recording}}" id="recbutt" disabled="{{rec}}" icon="av:fiber-manual-record" class="red big" title="heart"></paper-fab>
+      <paper-fab toggles active="{{recording}}" id="recbutt" disabled="{{rec}}" icon="{{fabicon}}" class="red big" title="heart"></paper-fab>
     </div>
   </template>
   <script>
@@ -37,7 +37,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {
         tag: {
           type: String,
-          notify: true
+          notify: true,
+          observer: '_tag'
         },
         key: {
           type: String,
@@ -69,10 +70,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         console.log("button pressed");
       },
 
+      _tag: function(){
+        if(this.tag=="antwoord"){
+        this.fabicon = "av:fiber-manual-record";
+      } else {
+        this.fabicon = "help";
+      }
+      },
 
 
       ready: function() { 
 
+        
 
         function __log(e, data) {
           log.innerHTML += "\n" + e + " " + (data || '');
