@@ -63,7 +63,8 @@ gulp.task('jshint', function () {
   return gulp.src([
 //      'app/scripts/**/*.js',
       'app/elements/**/*.js',
-      'app/elements/**/*.html'
+      //'app/elements/**/*.html',
+      '!app/scripts/vendor/*.js'
     ])
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint.extract()) // Extract JS from .html files
@@ -96,6 +97,11 @@ gulp.task('copy', function () {
   var bower = gulp.src([
     'bower_components/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
+
+  var vendor = gulp.src([
+    'app/scripts/**/*',
+    'app/*'
+  ]).pipe(gulp.dest('dist/scripts'));
 
   var elements = gulp.src(['app/elements/**/*.html'])
     .pipe(gulp.dest('dist/elements'));
@@ -267,7 +273,7 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize','rename-index', // 'cache-config',
+    //'vulcanize','rename-index', // 'cache-config',
     cb);
 });
 
