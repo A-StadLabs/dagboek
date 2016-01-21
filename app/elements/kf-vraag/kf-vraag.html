@@ -20,7 +20,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     
 
-         <audio id="audioElement" controls src="{{selectedVraag}}"></audio>
+         <audio id="audioElement" autoplay controls src="{{selectedVraag}}"></audio>
+         <button on-tap="_vragen">andere vraag</button>
 
        </template>
                
@@ -71,8 +72,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _vragen: function(){
+
         var lengte = this.vragen.length;
         var index = Math.floor(Math.random()*lengte);
+        console.log(lengte, index);
         
         this.selectedVraag = this.vragen[index].data.data;
         this.selectedkey = this.vragen[index].key;
