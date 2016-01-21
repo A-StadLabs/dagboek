@@ -62,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       attached: function(){
         var self = this;
-        var fb = new Firebase("https://dagboeka.firebaseio.com/vraag").orderByKey().limitToLast(10);
+        var fb = new Firebase("https://dagboeka.firebaseio.com/vraag").orderByKey();
         fb.on("value", function(snap){
           //console.log(snap.child(snap.key()).val().data);
           self.vragen = self.object2array(snap.val());
