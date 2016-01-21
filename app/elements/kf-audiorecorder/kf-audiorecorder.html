@@ -20,8 +20,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <h1>{{tag}}</h1>
-    <div><button on-tap="record" id="recordbutton">RECORD</button>
-    <button on-tap="stoprec" id="stoprecordbutton">STOP</button></div>
+    <div><button on-tap="record">RECORD</button>
+    <button on-tap="stoprec">STOP</button></div>
     <pre id="log"></pre>
   </template>
   <script>
@@ -37,19 +37,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         key: {
           type: String,
-          value: 'none'
+          value: 'none',
+          observer: '_keyChanged'
         }
       },
 
-      attached: function(){
+      _keyChanged: function(){
+        console.log("Changed key ",this.key, "tag: ", this.tag);
+      },
+
+      ready: function(){ 
+
+        console.log("kent em em ?", this.tag);
+
          function __log(e, data) {
-    log.innerHTML += "\n" + e + " " + (data || '');
-  }
+            log.innerHTML += "\n" + e + " " + (data || '');
+          }
 
      var audio_context;
-  var recorder;
+    var recorder;
 
-  var self = this;
+    var self = this;
 
 
 
@@ -80,22 +88,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   this.startRecording = function _startRecording(button, tag) {
     recorder && recorder.record();
-    button.disabled = true;
-    button.nextElementSibling.disabled = false;
+    //button.disabled = true;
+    //button.nextElementSibling.disabled = false;
     __log('Recording...');
   }
 
   this.stopRecording = function _stopRecording(button) {
     recorder && recorder.stop();
-    button.disabled = true;
-    button.previousElementSibling.disabled = false;
+    //button.disabled = true;
+    //button.previousElementSibling.disabled = false;
     __log('Stopped recording.');
     // create WAV download link using audio data blob
     createDownloadLink();
 
-    
-
-    //recorder.clear();
+    //self.recorder.clear();
   }
 
   function createDownloadLink(tag) {
