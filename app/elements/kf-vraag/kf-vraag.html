@@ -38,6 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           .big {
             width: 100px;
             height: 100px;
+            margin: 10px;
           }
           .btns {
             width: 100vw;
@@ -46,20 +47,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             width: 60vw;
             margin-left: 20vw;
             margin-right: 20vw;
-            margin-top: 10vh;
           }
         </style>
 <!--  <audio id="audioElement" src="{{selectedVraag}}"></audio>
  -->       
         <div class="btns horizontal layout center-center">
+         <paper-fab on-tap="love" icon="favorite" class="grey" title="heart"></paper-fab>
          <paper-fab on-tap="_play" disabled id="playbtn" icon="av:play-arrow" class="blue big" title="heart"></paper-fab>
+         <paper-fab on-tap="_vragen" icon="av:skip-next" class="grey" title="heart"></paper-fab>
        </div>
          <div class="horizontal layout center-center btns2">
           <div class="flex horizontal layout center-center">
-         <paper-fab on-tap="love" icon="favorite" class="grey" title="heart"></paper-fab>
+         
        </div>
         <div class="flex horizontal layout center-center">
-         <paper-fab on-tap="_vragen" icon="av:skip-next" class="grey" title="heart"></paper-fab>
+         
        </div>
        </div>
                
