@@ -18,11 +18,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
+      paper-fab.red {
+            --paper-fab-background: var(--paper-red-500);
+            --paper-fab-keyboard-focus-background: var(--paper-red-500-900);
+          }
     </style>
-    <h1>{{tag}}</h1>
     <div>
-      <button on-tap="record">RECORD</button>
-      <button on-tap="stoprec">STOP</button>
+      <p>{{rec}}</p>
+      <paper-fab on-tap="record" id="recbutt" disabled="{{rec}}" icon="av:fiber-manual-record" class="red big" title="heart"></paper-fab>
     </div>
   </template>
   <script>
@@ -40,11 +43,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: String,
           value: 'none',
           observer: '_keyChanged'
+        },
+        rec: {
+          type: Boolean,
+          observer: "_rec"
         }
       },
 
       _keyChanged: function() {
         console.log("Changed key ", this.key, "tag: ", this.tag);
+      },
+
+      _rec: function(){
+        if(!this.ready){
+          this.$.recbutt.removeAttribute("disabled");
+        }
       },
 
       ready: function() { 

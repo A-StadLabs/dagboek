@@ -89,60 +89,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
-      <paper-scroll-header-panel main condenses keep-condensed-header>
-
+     <!--  <paper-scroll-header-panel main condenses keep-condensed-header> -->
+<div main>
         <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar" class="tall">
+       <!--  <paper-toolbar id="mainToolbar" class="tall">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
           <span class="flex"></span>
 
-          <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
 
-          <!-- Application name -->
-          <div class="middle middle-container center horizontal layout">
-            <div class="app-name">dAgboek</div>
-          </div>
-
-          <!-- Application sub title -->
-          <div class="bottom bottom-container center horizontal layout">
-            <div class="bottom-title paper-font-subhead">The future of the web today</div>
-          </div>
-
-        </paper-toolbar>
+        </paper-toolbar> -->
 
         <!-- Main Content -->
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
             <section data-route="home">
-            <paper-material elevation="1">
-            
+ <div class="vertical layout demo">
+      <div class="flex vertical layout center-center">
+        <kf-vraag selectedkey="{{selectedkey}}" play="{{playing}}"></kf-vraag>
+        {{playing}}
+      </div>
+      <div class="flex vertical layout center-center">            
+        <kf-audiorecorder tag="antwoord" key="{{selectedkey}}" rec="{{playing}}"></kf-audiorecorder>
+      </div>
+    </div>
+              
 
-              <h1>De vraag</h1>
 
-              <kf-vraag selectedkey="{{selectedkey}}"></kf-vraag>
-                
-
-              <h1>uw antwoord:</h1>
-            <kf-audiorecorder tag="antwoord" key="{{selectedkey}}"></kf-audiorecorder>
-                
+          </section> 
 
               
-                 </paper-material>
-              
-              <paper-material elevation="1" class="paper-font-body2">
-                
-              </paper-material>
-
-            </section>
-
+             
             <section data-route="users">
               
   <h2 class="page-title">Stel een vraag aan A</h2>
                 <kf-audiorecorder tag="vraag" key="vraag"></kf-audiorecorder>
-
             </section>
 
             <section data-route="user-info">
@@ -163,8 +144,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           </iron-pages>
         </div>
-      </paper-scroll-header-panel>
-    </paper-drawer-panel>
+        </div>
+<!--       </paper-scroll-header-panel>
+ -->    </paper-drawer-panel>
 
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
     <!--
