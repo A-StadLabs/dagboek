@@ -17,12 +17,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
+      .streep {
+        border-bottom: 1px solid blue;
+      }
     </style>
     <iron-localstorage name="id" value="{{userid}}"></iron-localstorage>
     <template is="dom-repeat" items="{{mijnvragen}}">
+    <div class="horizontal layout streep">
     <kf-player data="{{item.data.data}}" key="" user=""></kf-player>
-    <span>{{item.data.key}}</span>
     <kf-antwoorden key="{{item.data.key}}"></kf-antwoorden>
+  </div>
     </template>
   </template>
   <script>
