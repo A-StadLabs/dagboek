@@ -24,8 +24,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.recend = function(){
     console.log("REC END");
     var vraag = document.querySelector('#vraag');
-    vraag._vragen();
-    vraag.autoplay = true;
+    //vraag._vragen();
+    //vraag.autoplay = true;
   };
 
   // See https://github.com/Polymer/polymer/issues/1381

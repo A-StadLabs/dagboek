@@ -144,7 +144,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             console.log("BLOB!!!", mp3blob, self.tag);
             // en hie gomme na firebase
             if(self.tag=="antwoord"){
-              var location = self.key+"/antwoorden";
+              var location = "vraag/"+self.key+"/antwoorden";
             };
             var firebase = new Firebase("https://dagboeka.firebaseio.com/" + location);
             console.log(firebase);

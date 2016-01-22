@@ -17,7 +17,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    <div>Hello from <span>{{foo}}</span></div>
+    <template is="dom-repeat" items="{{antwoorden}}">
+    <div>Hello from <span>{{item}}</span></div>
+  </template>
   </template>
   <script>
   (function() {
@@ -32,17 +34,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: '',
           notify: true,
           observer: "_key"
-        },
+        }
 
       },
 
       _key: function(){
         console.log("Antwoorden key changed: ", this.key);
-        var fb = new Firebase("https://dagboeka.firebaseio.com/"+this.key+"/antwoorden");
+        var fb = new Firebase("https://dagboeka.firebaseio.com/vraag/"+this.key+"/antwoorden");
+        var self = this;
         fb.on("value", function(snap){
-          console.log(snap.val());
+          console.log("FB antwoorden: ",snap.val());
+          if(!snap.val()==null){
+            self.object2array(snap.val());
+          }
         });
-      }
+      },
+
+      object2array: function(input){
+      var newarray = [];
+      var p = input;
+      for (var key in p) {
+        if (p.hasOwnProperty(key)) {
+          newarray.push({data: p[key], key: key});
+          //console.log(newarray);
+        }
+      };
+      return newarray;
+    },
 
     });
   })();
