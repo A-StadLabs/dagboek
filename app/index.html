@@ -77,13 +77,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Drawer Content -->
         <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
           <a data-route="home" href="/" on-click="onDataRouteClick">
-            <iron-icon icon="home"></iron-icon>
-            <span>Doe mee</span>
+            <span id="start">Start!</span>
+            <paper-badge label="6" for="antwoorden"></paper-badge>
           </a>
 
-          <a data-route="users" href="/users" on-click="onDataRouteClick">
-            <iron-icon icon="info"></iron-icon>
-            <span>Stel een vraag aan A</span>
+          <a data-route="recvraag" href="recvraag" on-click="onDataRouteClick">
+            <span>Stel zelf een vraag</span>
+          </a>
+
+          <a data-route="mijnantwoorden" href="mijnantwoorden" on-click="onDataRouteClick">
+            <span id="antwoorden">Mijn antwoorden</span>
+            <paper-badge label="0" for="antwoorden"></paper-badge>
+          </a>
+
+          <a data-route="mijnvragen" href="mijnvragen" on-click="onDataRouteClick">
+            <paper-badge label="0" for="vragen"></paper-badge>
+            <span id="vragen">Mijn vragen</span>
+          </a>
+
+          <a data-route="mijnfavs" href="mijnfavs" on-click="onDataRouteClick">
+            <paper-badge label="0" for="favs"></paper-badge>
+            <span id="favs">Favorieten</span>
           </a>
         </paper-menu>
       </paper-scroll-header-panel>
@@ -92,15 +106,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      <!--  <paper-scroll-header-panel main condenses keep-condensed-header> -->
 <div main>
         <!-- Main Toolbar -->
-       <!--  <paper-toolbar id="mainToolbar" class="tall">
-          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+     <!--    <paper-toolbar id="mainToolbar" class="tall">
+          
           <span class="flex"></span>
 
 
-        </paper-toolbar> -->
 
+        </paper-toolbar>
+ -->
         <!-- Main Content -->
         <div class="content">
+        <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
             <section data-route="home">
@@ -108,11 +124,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <div><h1>&nbsp;</h1></div>
   <img src="images/a_zwart-rgb.svg">
       <div class="flex vertical layout center-center">
-        <kf-vraag id="vraag" selectedkey="{{selectedkey}}" play="{{playing}}"></kf-vraag>
-        <kf-audiorecorder on-rec-end="recend" tag="antwoord" key="{{selectedkey}}" rec="{{playing}}"></kf-audiorecorder>
+        <kf-vraag id="vraag" selectedkey="{{selectedkey}}" play="{{playing}}">
+        <kf-audiorecorder on-rec-end="recend" tag="antwoord" key="{{selectedkey}}" rec="{{playing}}"></kf-audiorecorder>     </kf-vraag>
+        
       </div>
-      <div class="flex horizontal layout center-center">           
-        <kf-audiorecorder tag="vraag"></kf-audiorecorder>
+      <div class="flex horizontal layout center-center">
+
+        <kf-antwoorden key="{{selectedkey}}"></kf-antwoorden>
       </div>
     </div>
               
@@ -122,26 +140,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               
              
-            <section data-route="users">
-              
-  <h2 class="page-title">Stel een vraag aan A</h2>
-                <kf-audiorecorder tag="vraag" key="vraag"></kf-audiorecorder>
+            <section data-route="mijnantwoorden">
+              <div class="flex vertical layout center-center">
+  <h2 class="page-title">Mijn antwoorden</h2>
+  </div>
             </section>
 
-            <section data-route="user-info">
-              <paper-material elevation="1">
-                <h2 class="page-title">
-                User:<span>{{params.name}}</span>
-                </h2>
-                <div>This is <span>{{params.name}}</span>'s section</div>
-              </paper-material>
+            <section data-route="mijnvragen">
+            <div class="flex vertical layout center-center">
+              <h2 class="page-title">Mijn vragen</h2>
+            </div>
             </section>
 
-            <section data-route="contact">
-              <paper-material elevation="1">
-                <h2 class="page-title">Contact</h2>
-                <p>This is the contact section</p>
-              </paper-material>
+            <section data-route="recvraag">
+            <div class="flex vertical layout center-center">
+            <h2 class="page-title">Stel een vraag</h2>
+              <kf-audiorecorder tag="vraag"></kf-audiorecorder>
+            </div>
+            </section>
+
+             <section data-route="mijnfavs">
+            <div class="flex vertical layout center-center">
+              <h2 class="page-title">Mijn favorieten</h2>
+            </div>
             </section>
 
           </iron-pages>

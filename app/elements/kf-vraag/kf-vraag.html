@@ -44,10 +44,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             width: 100vw;
           }
           .btns2 {
-            width: 60vw;
-            margin-left: 20vw;
-            margin-right: 20vw;
-          }
+            margin: 10px;
+            }
         </style>
 <!--  <audio id="audioElement" src="{{selectedVraag}}"></audio>
  -->       
@@ -56,8 +54,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <div class="btns horizontal layout center-center">
          <paper-fab on-tap="love" icon="favorite" class="grey" title="heart"></paper-fab>
+
          <paper-fab on-tap="_play" disabled id="playbtn" icon="av:play-arrow" class="blue big" title="heart"></paper-fab>
-         <paper-fab on-tap="_vragen" icon="av:skip-next" class="grey" title="heart"></paper-fab>
+         <content></content>
+         <paper-fab class="btns2" on-tap="_vragen" icon="av:skip-next" class="grey" title="heart"></paper-fab>
        </div>
          <div class="horizontal layout center-center btns2">
           <div class="flex horizontal layout center-center">
@@ -141,7 +141,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _vragen: function(){
-
         var lengte = this.vragen.length;
         var index = Math.floor(Math.random()*lengte);
         console.log(lengte, index);

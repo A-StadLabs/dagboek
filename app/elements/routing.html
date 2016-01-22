@@ -20,22 +20,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.scrollPageToTop();
     });
 
-    page('/users', function () {
-      app.route = 'users';
+    page('/mijnantwoorden', function () {
+      app.route = 'mijnantwoorden';
       app.scrollPageToTop();
     });
 
-    page('/users/:name', function (data) {
-      app.route = 'user-info';
-      app.params = data.params;
+    page('/mijnvragen', function () {
+      app.route = 'mijnvragen';
       app.scrollPageToTop();
     });
 
-    page('/contact', function () {
-      app.route = 'contact';
+    page('/recvraag', function () {
+      app.route = 'recvraag';
       app.scrollPageToTop();
     });
 
+    page('/mijnfavs', function () {
+      app.route = 'mijnfavs';
+      app.scrollPageToTop();
+    });
+
+  
     // add #! before urls
     page({
       hashbang: true
