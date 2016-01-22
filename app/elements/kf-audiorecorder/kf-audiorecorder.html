@@ -158,7 +158,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             firebase.push({
               data: mp3blob,
               key: self.key,
-              userid: self.userid
+              userid: self.userid,
+              datetime: Date.now()
             }, function(e, f) {
               console.log(e, f);
               self.recorder.clear();
