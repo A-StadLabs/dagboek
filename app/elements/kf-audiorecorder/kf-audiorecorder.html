@@ -48,6 +48,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: 'none',
           observer: '_keyChanged'
         },
+        userid: {
+          type: String,
+          value: 'none'
+        },
         rec: {
           type: Boolean,
           observer: "_rec"
@@ -145,12 +149,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // en hie gomme na firebase
             if(self.tag=="antwoord"){
               var location = "vraag/"+self.key+"/antwoorden";
+            } else {
+              var location = "antwoord/"+self.key;
             };
             var firebase = new Firebase("https://dagboeka.firebaseio.com/" + location);
             console.log(firebase);
             firebase.push({
               data: mp3blob,
-              key: self.key
+              key: self.key,
+              userid: self.userid
             }, function(e, f) {
               console.log(e, f);
             });

@@ -164,14 +164,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _vraag: function(){
         //console.log(selectedVraag);
-        if(document.getElementById("player")){
-        var weg = document.getElementById("player");
+        if(document.getElementById(this.selectedkey)){
+        var weg = document.getElementById(this.selectedkey);
         document.body.removeChild(weg);
       };
 
         var audioplayer = document.createElement("audio");
         audioplayer.controls = false;
-        audioplayer.id = "player";
+        audioplayer.id = this.selectedkey;
         audioplayer.src = this.selectedVraag;
         audioplayer.autoplay = this.autoplay;
         //audioplayer.setAttribute('ontimeupdate','this._timeupdate(this)');

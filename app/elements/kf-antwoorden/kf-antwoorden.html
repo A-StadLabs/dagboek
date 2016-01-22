@@ -17,9 +17,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
+    <div class="horizontal layout">
     <template is="dom-repeat" items="{{antwoorden}}">
-    <div>Hello from <span>{{item}}</span></div>
-  </template>
+    <kf-player data="{{item.data.data}}" key="" user=""></kf-player>
+     </template>
+    </div>
   </template>
   <script>
   (function() {
@@ -44,9 +46,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var self = this;
         fb.on("value", function(snap){
           console.log("FB antwoorden: ",snap.val());
-          if(!snap.val()==null){
-            self.object2array(snap.val());
-          }
+          // if(!snap.val()===null){
+            self.antwoorden = self.object2array(snap.val());
+            console.log(self.antwoorden);
+          // }
         });
       },
 
@@ -60,6 +63,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       };
       return newarray;
+      console.log("object2array: ",newarray);
     },
 
     });
