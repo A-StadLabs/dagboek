@@ -165,6 +165,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               self.recorder.clear();
               self.rec = false;
             });
+
+            var fbuser = new Firebase("https://dagboeka.firebaseio.com/user/" + self.userid + "/" + self.tag);
+            fbuser.push({
+              data: mp3blob,
+              key: self.key,
+              datetime: Date.now()
+            }, function(e, f) {
+              console.log(e, f);
+            });
+
           };
           __log('Recorder initialised.');
         }
