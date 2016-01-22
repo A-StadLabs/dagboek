@@ -52,6 +52,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!--  <audio id="audioElement" src="{{selectedVraag}}"></audio>
  -->       
         <div class="btns horizontal layout center-center">
+          <template is="dom-if" if="{{play}}">{{currentTime}}/{{duration}}</template>
+        </div>
+        <div class="btns horizontal layout center-center">
          <paper-fab on-tap="love" icon="favorite" class="grey" title="heart"></paper-fab>
          <paper-fab on-tap="_play" disabled id="playbtn" icon="av:play-arrow" class="blue big" title="heart"></paper-fab>
          <paper-fab on-tap="_vragen" icon="av:skip-next" class="grey" title="heart"></paper-fab>
@@ -96,13 +99,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         play: {
           type: Boolean,
           notify: true,
-          value: true
+          value: false
         },
         autoplay: {
           type: Boolean,
           notify: true,
           value: true
-        }
+        },
+        duration: {
+          type: Number,
+          notify: true
+        },
+        currentTime: {
+          type: Number,
+          notify: true
+        },
       },
 
       _audios: function(){
@@ -164,18 +175,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         audioplayer.id = "player";
         audioplayer.src = this.selectedVraag;
         audioplayer.autoplay = this.autoplay;
+        //audioplayer.setAttribute('ontimeupdate','this._timeupdate(this)');
         document.body.appendChild(audioplayer); 
         this.$.playbtn.removeAttribute("disabled");
 
         var self = this;
 
+        audioplayer.addEventListener('loadedmetadata',function(){
+          self.duration = audioplayer.duration;
+//          console.log('duration',audioplayer.duration);
+        },false);
+
         var aud = audioplayer;
+        aud.onplay = function(){
+          self.play = true;
+        };
         aud.onended = function() {
          // alert("The audio has ended");
          self.play = false;
         };
-        
-        
+
+        aud.ontimeupdate = function(r){
+          self.currentTime = r.srcElement.currentTime;
+        }; 
       },
 
       _play: function(){
