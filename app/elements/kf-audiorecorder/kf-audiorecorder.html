@@ -143,7 +143,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           self.recorder.mp3encoded = function(mp3blob) {
             console.log("BLOB!!!", mp3blob, self.tag);
             // en hie gomme na firebase
-            var firebase = new Firebase("https://dagboeka.firebaseio.com/" + self.tag);
+            if(self.tag=="antwoord"){
+              var location = self.key+"/antwoorden";
+            };
+            var firebase = new Firebase("https://dagboeka.firebaseio.com/" + location);
             console.log(firebase);
             firebase.push({
               data: mp3blob,
