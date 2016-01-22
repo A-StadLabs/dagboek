@@ -10,7 +10,9 @@
     "page": "visionmedia/page.js#~1.6.3",
     "ph-core-audio": "silentHoo/ph-core-audio#~0.1.0",
     "firebase-element": "GoogleWebComponents/firebase-element#~1.0.10",
-    "mic-visualize": "DmitryAuine/Polymer-audio-elements"
+    "mic-visualize": "DmitryAuine/Polymer-audio-elements",
+    "uuid": "~2.0.1",
+    "node-uuid": "~1.4.7"
   },
   "devDependencies": {},
   "resolutions": {

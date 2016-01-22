@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <script src="../../scripts/recordmp3.js"></script>
 <script src="../../bower_components/firebase/firebase.js"></script>
+  <script src="../../bower_components/node-uuid/uuid.js"></script>
 
 <dom-module id="kf-audiorecorder">
   <template>
@@ -24,6 +25,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             --paper-fab-keyboard-focus-background: var(--paper-red-500-900);
           }
     </style>
+    <iron-localstorage name="id" value="{{userid}}"
+        on-iron-localstorage-load-empty="createuser"></iron-localstorage>
     <div>
       <paper-fab toggles active="{{recording}}" id="recbutt" disabled="{{rec}}" icon="{{fabicon}}" class="red big" title="heart"></paper-fab>
     </div>
@@ -64,6 +67,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if(!this.ready){
           this.$.recbutt.removeAttribute("disabled");
         }
+      },
+
+      createuser: function(){
+        this.userid = uuid.v4();
       },
 
       test: function(){
