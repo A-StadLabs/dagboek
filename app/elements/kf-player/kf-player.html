@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 10px;
       }
     </style>
-    <audio id="player" src="{{data}}"></audio>
+    <audio id="player2" src="{{data}}"></audio>
     <paper-fab on-tap="_play" id="playbtn" icon="{{playericon}}"></paper-fab>
   </template>
   <script>
@@ -48,7 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ready: function(){
         this.playericon = "av:play-arrow";
         var self = this;
-        var aud = this.$.player;
+        var aud = this.$.player2;
         aud.canplay = function(){
           self.playericon = "av:play-arrow";
         };
@@ -61,7 +61,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _play: function(){
-        this.$.player.play();
+        this.$.player2.play();
         this.playericon = "av:play-arrow"
       }
 
