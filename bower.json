@@ -12,7 +12,8 @@
     "firebase-element": "GoogleWebComponents/firebase-element#~1.0.10",
     "mic-visualize": "DmitryAuine/Polymer-audio-elements",
     "uuid": "~2.0.1",
-    "node-uuid": "~1.4.7"
+    "node-uuid": "~1.4.7",
+    "webaudio-analyzer": "~0.0.1"
   },
   "devDependencies": {},
   "resolutions": {

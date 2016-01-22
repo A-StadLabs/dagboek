@@ -149,8 +149,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // en hie gomme na firebase
             if(self.tag=="antwoord"){
               var location = "vraag/"+self.key+"/antwoorden";
-            } else {
-              var location = "antwoord/"+self.key;
+            } 
+            if(self.tag=="original"){
+              var location = "vraag/";
             };
             var firebase = new Firebase("https://dagboeka.firebaseio.com/" + location);
             console.log(firebase);
@@ -160,6 +161,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               userid: self.userid
             }, function(e, f) {
               console.log(e, f);
+              self.recorder.clear();
+              self.rec = false;
             });
           };
           __log('Recorder initialised.');
@@ -174,7 +177,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         this.stopRecording = function _stopRecording(button) {
           self.recorder && self.recorder.stop();
-          //button.disabled = true;
+          this.$.rec = true;
           //button.previousElementSibling.disabled = false;
           __log('Stopped recording.');
           // create WAV download link using audio data blob
