@@ -22,51 +22,70 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <paper-fab on-tap="_play" id="playbtn" icon="{{playericon}}"></paper-fab>
   </template>
   <script>
-  (function() {
-    'use strict';
+    (function() {
+      'use strict';
 
-    Polymer({
-      is: 'kf-player',
+      Polymer({
+        is: 'kf-player',
 
-      properties: {
-        data: {
-          type: String,
-          value: '',
-          notify: true
+        properties: {
+          data: {
+            type: String,
+            value: '',
+            notify: true
+          },
+          key: {
+            type: String,
+            value: ''
+          },
+          user: {
+            type: String,
+            value: '',
+            notify: true
+          },
+          playing: {
+            type: Boolean,
+            value: false,
+            observer: "_changeplaying"
+          }
         },
-        key: {
-          type: String,
-          value: ''
+
+        ready: function() {
+          this.playericon = "av:play-arrow";
+          var self = this;
+          var aud = this.$.player2;
+          aud.canplay = function() {
+            //          self.playericon = "av:play-arrow";
+          };
+          aud.onplay = function() {
+            self.playing = true;
+          };
+          aud.onended = function() {
+            self.playing = false;
+          };
         },
-        user: {
-          type: String,
-          value: '',
-          notify: true
+
+        _changeplaying: function() {
+          if (this.playing) {
+            this.playericon = "av:pause";
+          } else {
+            this.playericon = "av:play-arrow";
+          }
+        },
+
+        _play: function() {
+          if (this.playing) {
+            this.$.player2.pause();
+            this.playing = false;
+          } else {
+            this.$.player2.play();
+            this.playing = true;
+
+          }
         }
-      },
-
-      ready: function(){
-        this.playericon = "av:play-arrow";
-        var self = this;
-        var aud = this.$.player2;
-        aud.canplay = function(){
-          self.playericon = "av:play-arrow";
-        };
-        aud.onplay = function(){
-          self.playericon = "av:pause";
-        };
-        aud.onended = function(){
-          self.playericon = "av:play-arrow";
-        };
-      },
-
-      _play: function(){
-        this.$.player2.play();
-        this.playericon = "av:play-arrow"
-      }
 
 
-    });
-  })();
+      });
+    })();
   </script>
 </dom-module>
