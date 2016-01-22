@@ -14,6 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/av-icons.html">
 
+
 <dom-module id="kf-vraag">
   <template>
     <style>
@@ -46,143 +47,167 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             margin: 10px;
             }
         </style>
-    <audio id="audiokfvraag" src="{{selectedVraag}}"></audio>
-    <div class="btns horizontal layout center-center">
-      <template is="dom-if" if="{{play}}">
-        <span>{{currentTime}}</span>
-        /
-        <span>{{duration}}</span>
-      </template>
-    </div>
-    <div class="btns horizontal layout center-center">
-      <paper-fab on-tap="love" icon="favorite" class="grey" title="heart"></paper-fab>
+<!--  <audio id="audioElement" src="{{selectedVraag}}"></audio>
+ -->       
+        <div class="btns horizontal layout center-center">
+        <template is="dom-if" if="{{play}}"><span>{{currentTime}}</span>/<span>{{duration}}</template>
+        </div>
+        <div class="btns horizontal layout center-center">
+         <paper-fab on-tap="love" icon="favorite" class="grey" title="heart"></paper-fab>
 
-      <paper-fab on-tap="_play" disabled id="playbtn" icon="av:play-arrow" class="blue big" title="heart"></paper-fab>
-      <content></content>
-      <paper-fab class="btns2" on-tap="_vragen" icon="av:skip-next" class="grey" title="heart"></paper-fab>
-    </div>
-    <div class="horizontal layout center-center btns2">
-      <div class="flex horizontal layout center-center"></div>
-      <div class="flex horizontal layout center-center"></div>
-    </div>
-
+         <paper-fab on-tap="_play" disabled id="playbtn" icon="av:play-arrow" class="blue big" title="heart"></paper-fab>
+         <content></content>
+         <paper-fab class="btns2" on-tap="_vragen" icon="av:skip-next" class="grey" title="heart"></paper-fab>
+       </div>
+         <div class="horizontal layout center-center btns2">
+          <div class="flex horizontal layout center-center">
+         
+       </div>
+        <div class="flex horizontal layout center-center">
+         
+       </div>
+       </div>
+               
   </template>
   <script>
-(function() {
 
-  'use strict';
+  (function() {
+   
+    'use strict';
 
-  Polymer({
-    is: 'kf-vraag',
+    Polymer({
+      is: 'kf-vraag',
 
-    properties: {
-      selectedkey: {
-        type: String,
-        notify: true
+      properties: {
+        selectedkey: {
+          type: String,
+          notify: true
+        },
+        selectedVraag: {
+          type: String,
+          notify: true,
+          observer: '_vraag'
+        },
+        audios: {
+          type: Array,
+          observer: '_audios',
+          notify: true
+        },
+        vragen: {
+          observer: "_vragen"
+        },
+        play: {
+          type: Boolean,
+          notify: true,
+          value: false
+        },
+        autoplay: {
+          type: Boolean,
+          notify: true,
+          value: false
+        },
+        duration: {
+          type: Number,
+          notify: true
+        },
+        currentTime: {
+          type: Number,
+          notify: true
+        },
       },
-      selectedVraag: {
-        type: String,
-        notify: true,
-        observer: '_vraag'
-      },
-      audios: {
-        type: Array,
-        notify: true
-      },
-      vragen: {
-        observer: "_vragen"
-      },
-      play: {
-        type: Boolean,
-        notify: true,
-        value: false
-      },
-      autoplay: {
-        type: Boolean,
-        notify: true,
-        value: false
-      },
-      duration: {
-        type: Number,
-        notify: true
-      },
-      currentTime: {
-        type: Number,
-        notify: true
-      },
-    },
 
-    attached: function() {
-      var self = this;
-      var fb = new Firebase("https://dagboeka.firebaseio.com/vraag").orderByKey();
-      fb.on("value", function(snap) {
-        self.vragen = self.object2array(snap.val());
-      });
-      this.addEventListener('shuffle', function() {
-        self._vragen;
-      });
-    },
+      _audios: function(){
+        //console.log("Firebase: ", this.audios);
+      },
 
-    _vragen: function() {
-      var lengte = this.vragen.length;
-      var index = Math.floor(Math.random() * lengte);
-      console.log(lengte, index);
+      test: function(){
+        //console.log("CHild added?");
+      },
 
-      this.selectedVraag = this.vragen[index].data.data;
-      this.selectedkey = this.vragen[index].key;
-      console.log(this.selectedkey);
-    },
+      
 
-    object2array: function(input) {
+      attached: function(){
+        var self = this;
+        var fb = new Firebase("https://dagboeka.firebaseio.com/vraag").orderByKey();
+        fb.on("value", function(snap){
+          //console.log(snap.child(snap.key()).val().data);
+          self.vragen = self.object2array(snap.val());
+          
+        });
+        this.addEventListener('shuffle', function(){
+          self._vragen;
+        });
+        
+      },
+
+      _vragen: function(){
+        var lengte = this.vragen.length;
+        var index = Math.floor(Math.random()*lengte);
+        console.log(lengte, index);
+        
+        this.selectedVraag = this.vragen[index].data.data;
+        this.selectedkey = this.vragen[index].key;
+        console.log(this.selectedkey);
+      },
+
+      object2array: function(input){
       var newarray = [];
       var p = input;
       for (var key in p) {
         if (p.hasOwnProperty(key)) {
-          newarray.push({
-            data: p[key],
-            key: key
-          });
+          newarray.push({data: p[key], key: key});
+          //console.log(newarray);
         }
       };
       return newarray;
     },
 
-    _vraag: function() {
-
-
-      var audioplayer = this.$.audiokfvraag;
-      audioplayer.controls = false;
-      audioplayer.src = this.selectedVraag;
-      audioplayer.autoplay = this.autoplay;
-      this.$.playbtn.removeAttribute("disabled");
-
-      var self = this;
-
-      audioplayer.addEventListener('loadedmetadata', function() {
-        self.duration = audioplayer.duration;
-      }, false);
-
-      var aud = audioplayer;
-      aud.onplay = function() {
-        self.play = true;
-      };
-      aud.onended = function() {
-        self.play = false;
+      _vraag: function(){
+        //console.log(selectedVraag);
+        if(document.getElementById("player")){
+        var weg = document.getElementById("player");
+        document.body.removeChild(weg);
       };
 
-      aud.ontimeupdate = function(r) {
-        self.currentTime = r.srcElement.currentTime;
-      };
-    },
+        var audioplayer = document.createElement("audio");
+        audioplayer.controls = false;
+        audioplayer.id = "player";
+        audioplayer.src = this.selectedVraag;
+        audioplayer.autoplay = this.autoplay;
+        //audioplayer.setAttribute('ontimeupdate','this._timeupdate(this)');
+        document.body.appendChild(audioplayer); 
+        this.$.playbtn.removeAttribute("disabled");
 
-    _play: function() {
-      var audioplayer = this.$.audiokfvraag;
-      this.play = true;
-      audioplayer.play();
-    }
+        var self = this;
+
+        audioplayer.addEventListener('loadedmetadata',function(){
+          self.duration = audioplayer.duration;
+//          console.log('duration',audioplayer.duration);
+        },false);
+
+        var aud = audioplayer;
+        aud.onplay = function(){
+          self.play = true;
+        };
+        aud.onended = function() {
+         // alert("The audio has ended");
+         self.play = false;
+        };
+
+        aud.ontimeupdate = function(r){
+          self.currentTime = r.srcElement.currentTime;
+        }; 
+      },
+
+      _play: function(){
+        var aud = document.getElementById("player");
+        console.log(aud);
+        this.play = true;
+        aud.play();
+      }
 
 
-  });
-})();
+    });
+  })();
   </script>
 </dom-module>

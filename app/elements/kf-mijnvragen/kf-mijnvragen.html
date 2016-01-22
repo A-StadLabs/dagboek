@@ -1,0 +1,68 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<script src="../../bower_components/firebase/firebase.js"></script>
+
+<dom-module id="kf-mijnvragen">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-localstorage name="id" value="{{userid}}"></iron-localstorage>
+    <template is="dom-repeat" items="{{mijnvragen}}">
+    <kf-player data="{{item.data.data}}" key="" user=""></kf-player>
+    <span>{{item.data.key}}</span>
+    <kf-antwoorden key="{{item.data.key}}"></kf-antwoorden>
+    </template>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'kf-mijnvragen',
+
+      properties: {
+        userid: {
+          type: String,
+          notify: true,
+          observer: "_userid"
+        }
+      },
+
+      _userid: function(){
+        console.log(this.userid);
+        var self = this;
+        var userfb = new Firebase("https://dagboeka.firebaseio.com/user/"+this.userid+"/original/");
+        userfb.on("value", function(snap){
+          console.log(snap.val());
+          self.mijnvragen = self.object2array(snap.val());
+        });
+      },
+
+       object2array: function(input){
+      var newarray = [];
+      var p = input;
+      for (var key in p) {
+        if (p.hasOwnProperty(key)) {
+          newarray.push({data: p[key], key: key});
+          //console.log(newarray);
+        }
+      };
+      return newarray;
+    },
+
+    });
+  })();
+  </script>
+</dom-module>

@@ -154,22 +154,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               var location = "vraag/";
             };
             var firebase = new Firebase("https://dagboeka.firebaseio.com/" + location);
-            console.log(firebase);
-            firebase.push({
+            //console.log(firebase);
+            self.newref = firebase.push({
               data: mp3blob,
               key: self.key,
               userid: self.userid,
               datetime: Date.now()
-            }, function(e, f) {
-              console.log(e, f);
-              self.recorder.clear();
-              self.rec = false;
             });
+
+        
 
             var fbuser = new Firebase("https://dagboeka.firebaseio.com/user/" + self.userid + "/" + self.tag);
             fbuser.push({
               data: mp3blob,
-              key: self.key,
+              key: self.newref.key(),
               datetime: Date.now()
             }, function(e, f) {
               console.log(e, f);

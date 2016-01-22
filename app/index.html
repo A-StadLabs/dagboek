@@ -124,7 +124,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <div><h1>&nbsp;</h1></div>
   <img src="images/a_zwart-rgb.svg">
       <div class="flex vertical layout center-center">
-        <kf-vraag id="vraag" selectedkey="{{selectedkey}}" play="{{playing}}">
+        <kf-vraag shuffle id="vraag" selectedkey="{{selectedkey}}" play="{{playing}}">
         <kf-audiorecorder on-rec-end="recend" tag="antwoord" key="{{selectedkey}}" rec="{{playing}}"></kf-audiorecorder>     </kf-vraag>
         
       </div>
@@ -147,7 +147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <section data-route="mijnvragen">
             <div class="flex vertical layout center-center">
-              <h2 class="page-title">Mijn vragen</h2>
+            <kf-mijnvragen></kf-mijnvragen>
             </div>
             </section>
 
@@ -163,6 +163,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <h2 class="page-title">Mijn favorieten</h2>
             </div>
             </section>
+
+             <section data-route="vraag">
+ <div class="vertical layout demo">
+  <div><h1>&nbsp;</h1></div>
+  <img src="images/a_zwart-rgb.svg">
+      <div class="flex vertical layout center-center">
+        <kf-vraag id="vraag" selectedkey="{{params.selectedkey}}" play="{{playing}}">
+        <kf-audiorecorder on-rec-end="recend" tag="antwoord" key="{{params.selectedkey}}" rec="{{playing}}"></kf-audiorecorder>     </kf-vraag>
+        
+      </div>
+      <div class="flex horizontal layout center-center">
+        <kf-antwoorden key="{{selectedkey}}"></kf-antwoorden>
+      </div>
+    </div>
+              
+
+
+          </section> 
 
           </iron-pages>
         </div>
