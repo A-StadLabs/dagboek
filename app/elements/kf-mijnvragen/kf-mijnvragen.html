@@ -41,6 +41,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: String,
           notify: true,
           observer: "_userid"
+        },
+        mijnvragen: {
+          type: Array,
+          observer: "_mijnvragen"
+        },
+        aantalvragen: {
+          type: Number,
+          notify: true
         }
       },
 
@@ -52,6 +60,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           console.log(snap.val());
           self.mijnvragen = self.object2array(snap.val());
         });
+      },
+
+      _mijnvragen: function(){
+        this.aantalvragen = this.mijnvragen.length;
       },
 
        object2array: function(input){

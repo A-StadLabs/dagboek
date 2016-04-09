@@ -32,6 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   window.addEventListener('WebComponentsReady', function() {
     // imports are loaded and elements have been registered
     app.init = true;
+    app.playing = false;
   });
 
   

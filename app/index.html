@@ -91,7 +91,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </a>
 
           <a data-route="mijnvragen" href="mijnvragen" on-click="onDataRouteClick">
-            <paper-badge label="0" for="vragen"></paper-badge>
+            <paper-badge label="{{aantalmijnvragen}}" for="vragen"></paper-badge>
             <span id="vragen">Mijn vragen</span>
           </a>
 
@@ -147,7 +147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <section data-route="mijnvragen">
             <div class="flex vertical layout center-center">
-            <kf-mijnvragen></kf-mijnvragen>
+            <kf-mijnvragen aantalvragen="{{aantalmijnvragen}}"></kf-mijnvragen>
             </div>
             </section>
 
